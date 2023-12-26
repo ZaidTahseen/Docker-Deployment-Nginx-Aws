@@ -7,3 +7,17 @@ before_install:
 
 script:
   - docker run -e CI=true reactimage npm run test -- --coverage
+
+deploy:
+  provider: elasticbeanstalk
+  access_key_id:
+    secure: "$AWS_ACCESS_KEY"
+  secret_access_key:
+    secure: "$AWS_SECRET_KEY"
+  region: "ap-south-1"
+  app: "React-Travis-Docker"
+  env: "React-Travis-Docker-env"
+  bucket_name: "elasticbeanstalk-ap-south-1-857791165979"
+  bucket_path: "React-Travis-Docker"
+  on:
+    branch: master
